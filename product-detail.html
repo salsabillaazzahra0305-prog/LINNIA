@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Produk | LINNIA Pempek & Tekwan</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Google Fonts: Plus Jakarta Sans & Playfair Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              cream: '#FAF7F2',
+              creamSoft: '#F4ECE1',
+              border: '#E8DFC8',
+              borderDark: '#D4C4A8',
+              cuko: '#2B1408',
+              cukoDark: '#1E0E05',
+              cukoMuted: '#4A2A1A',
+              gold: '#C07A23',
+              goldDark: '#9E6219',
+              amberBg: '#FEF8EE'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Playfair Display"', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #FAF7F2;
+      color: #2B1408;
+    }
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans antialiased selection:bg-brand-gold selection:text-white">
+
+  <!-- ================= TOP HEADER / NAVBAR ================= -->
+  <header class="bg-white border-b border-brand-border sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="logo.jpg.jpeg" alt="Logo" onerror="this.src='https://via.placeholder.com/50'" class="w-10 h-10 rounded-xl object-cover border border-brand-border">
+        <div>
+          <span class="font-serif font-bold text-xl sm:text-2xl text-brand-cuko tracking-tight block leading-none">LINNIA</span>
+          <span class="text-[10px] uppercase tracking-widest text-brand-gold font-semibold block mt-1">Pempek & Tekwan</span>
+        </div>
+      </a>  
+
+      <div class="flex items-center gap-3">
+        <button onclick="toggleCartDrawer(true)" class="relative p-2.5 rounded-full bg-brand-creamSoft text-brand-cuko hover:bg-brand-cuko hover:text-white transition shadow-sm flex items-center justify-center" title="Buka Keranjang">
+          <i class="fa-solid fa-bag-shopping text-base"></i>
+          <span id="nav-cart-counter" class="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <main class="flex-1 max-w-6xl mx-auto w-full px-4 sm:px-6 py-6 sm:py-10">
+
+    <div class="mb-6 flex items-center justify-between flex-wrap gap-3">
+      <a href="index.html#menu" class="inline-flex items-center gap-2.5 px-4 py-2 rounded-xl bg-white border border-brand-border text-brand-cuko text-xs sm:text-sm font-semibold hover:border-brand-cuko hover:bg-brand-creamSoft transition shadow-xs group">
+        <i class="fa-solid fa-arrow-left text-xs text-brand-gold group-hover:-translate-x-1 transition-transform"></i>
+        <span>Kembali ke Menu Makanan</span>
+      </a>
+
+      <div class="text-xs text-gray-500 flex items-center gap-2">
+        <a href="index.html" class="hover:underline">Beranda</a>
+        <span>/</span>
+        <a href="index.html#menu" class="hover:underline">Katalog Menu</a>
+        <span>/</span>
+        <span id="breadcrumb-title" class="font-semibold text-brand-cuko">Memuat...</span>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast-notify" class="hidden mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs sm:text-sm flex items-center justify-between shadow-xs">
+      <div class="flex items-center gap-3">
+        <i class="fa-solid fa-circle-check text-emerald-600 text-base"></i>
+        <span id="toast-text">Produk berhasil ditambahkan ke keranjang belanja!</span>
+      </div>
+      <button onclick="toggleCartDrawer(true)" class="font-bold underline text-emerald-800 hover:text-emerald-950 ml-2">Lihat Keranjang &rarr;</button>
+    </div>
+
+    <!-- Grid Detail Produk -->
+    <div id="product-container" class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start opacity-0 transition-opacity duration-500">
+
+      <!-- Kolom Kiri: Foto Produk -->
+      <div class="lg:col-span-6 space-y-4">
+        <div class="bg-white rounded-3xl border border-brand-border p-3 shadow-xs relative overflow-hidden">
+          <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-brand-creamSoft flex items-center justify-center">
+            <img 
+              id="main-product-img" 
+              src="pempek.jpg" 
+              alt="Produk LINNIA" 
+              onerror="this.src='pempek.jpg'" 
+              class="w-full h-full object-cover transition duration-300"
+            >
+            <div class="absolute top-3 left-3 flex flex-col gap-1.5 items-start">
+              <span id="product-badge" class="px-3 py-1 rounded-full bg-brand-cuko text-amber-300 text-[10px] font-bold uppercase tracking-wider shadow-sm hidden">
+              </span>
+              <span class="px-2.5 py-0.5 rounded-full bg-white/95 text-emerald-800 border border-emerald-200 text-[10px] font-bold flex items-center gap-1.5 shadow-xs">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span id="product-stock-status">Tersedia</span>
+              </span>
+            </div>
+            
+            <span class="absolute bottom-3 right-3 px-3 py-1 rounded-lg bg-black/60 backdrop-blur-sm text-white text-[10px] font-semibold flex items-center gap-1.5">
+              <i class="fa-solid fa-snowflake text-cyan-300"></i> Frozen Vacuum Sealed
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-4 gap-3" id="thumbnails-container">
+          <!-- Thumbnails di-render oleh JS -->
+        </div>
+
+        <div class="bg-white rounded-2xl border border-brand-border p-5 space-y-3">
+          <div class="flex items-center gap-3 text-xs text-gray-700">
+            <div class="w-8 h-8 rounded-lg bg-brand-creamSoft flex items-center justify-center text-brand-gold shrink-0">
+              <i class="fa-solid fa-fish-fins"></i>
+            </div>
+            <div>
+              <strong class="text-brand-cuko block font-bold">100% Olahan Ikan Segar</strong>
+              <span>Dibuat tanpa bahan pengawet sintetik, pemutih, atau perasa buatan.</span>
+            </div>
+          </div>
+          <div class="border-t border-brand-border/60 pt-3 flex items-center gap-3 text-xs text-gray-700">
+            <div class="w-8 h-8 rounded-lg bg-brand-creamSoft flex items-center justify-center text-brand-gold shrink-0">
+              <i class="fa-solid fa-temperature-arrow-down"></i>
+            </div>
+            <div>
+              <strong class="text-brand-cuko block font-bold">Ketahanan Freezer 1–2 Bulan</strong>
+              <span>Kemasan vakum kedap udara menjaga cita rasa dan kesegaran khas LINNIA.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kolom Kanan: Rincian Info, Porsi & Aksi Pesan -->
+      <div class="lg:col-span-6 space-y-6">
+        <div class="bg-white rounded-3xl border border-brand-border p-6 shadow-xs space-y-4">
+          <div class="space-y-1">
+            <span id="product-category-text" class="text-xs uppercase tracking-widest font-bold text-brand-gold">Kategori</span>
+            <h1 id="product-title" class="font-serif text-2xl sm:text-3xl font-bold text-brand-cuko leading-tight">
+              Nama Produk
+            </h1>
+          </div>
+
+          <div class="flex items-center gap-3 text-xs pb-3 border-b border-brand-border">
+            <div class="flex items-center text-amber-500 gap-1">
+              <i class="fa-solid fa-star text-xs"></i>
+              <span class="font-bold text-brand-cuko">4.9</span>
+            </div>
+            <span class="text-gray-300">•</span>
+            <span class="text-gray-600">Terjual Ratusan Pack</span>
+            <span class="text-gray-300">•</span>
+            <span class="text-emerald-700 font-semibold flex items-center gap-1">
+              <i class="fa-solid fa-shield-check text-xs"></i> Halal & Higienis
+            </span>
+          </div>
+
+          <div class="flex items-baseline gap-3">
+            <span id="display-price" class="font-serif text-3xl font-bold text-brand-cuko">Rp 0</span>
+            <span class="text-xs text-gray-500 font-medium">/ pack terpilih</span>
+          </div>
+
+          <p id="product-description" class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+            Deskripsi produk.
+          </p>
+
+          <!-- Detail Isi Pack -->
+          <div class="pt-2">
+            <div class="p-4 rounded-2xl bg-brand-cream border border-brand-border space-y-2.5">
+              <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-cuko">
+                <i class="fa-solid fa-box-open text-brand-gold"></i>
+                <span>Apa Saja yang Ada di Dalam Pack Ini?</span>
+              </div>
+              <ul id="package-contents-list" class="space-y-1.5 text-xs text-gray-700"></ul>
+            </div>
+          </div>
+
+          <!-- Pilihan Varian Pack -->
+          <div class="space-y-2 pt-2">
+            <label class="block text-xs font-bold uppercase tracking-wider text-brand-cuko">
+              Pilih Varian Kemasan & Porsi:
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5" id="variant-selector-container"></div>
+          </div>
+
+          <!-- Counter Kuantitas -->
+          <div class="space-y-2 pt-1">
+            <div class="flex items-center justify-between">
+              <label class="text-xs font-bold uppercase tracking-wider text-brand-cuko">
+                Jumlah Pack (Qty):
+              </label>
+              <span class="text-[11px] text-gray-500 font-medium">
+                Status: <strong id="stock-available" class="text-brand-cuko">Tersedia</strong>
+              </span>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <div class="inline-flex items-center border border-brand-border rounded-xl bg-brand-creamSoft/50 overflow-hidden">
+                <button type="button" onclick="updateQty(-1)" class="w-10 h-10 flex items-center justify-center text-brand-cuko hover:bg-brand-creamSoft transition font-bold">
+                  <i class="fa-solid fa-minus text-xs"></i>
+                </button>
+                <input type="number" id="qty-input" value="1" min="1" max="50" class="w-14 text-center text-sm font-bold text-brand-cuko bg-transparent border-0 focus:ring-0" onchange="validateManualQty(this.value)">
+                <button type="button" onclick="updateQty(1)" class="w-10 h-10 flex items-center justify-center text-brand-cuko hover:bg-brand-creamSoft transition font-bold">
+                  <i class="fa-solid fa-plus text-xs"></i>
+                </button>
+              </div>
+
+              <div class="text-right flex-1">
+                <span class="text-[10px] text-gray-500 uppercase tracking-wide block">Subtotal Produk</span>
+                <span id="display-subtotal" class="font-serif font-bold text-lg text-brand-gold">Rp 0</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tombol Aksi -->
+          <div class="pt-4 space-y-2.5">
+            <div class="grid grid-cols-1 gap-3">
+              <button type="button" onclick="handleAddToCart()" class="w-full py-3.5 px-4 rounded-xl bg-brand-cuko hover:bg-brand-cukoDark text-white font-bold text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-xs">
+                <i class="fa-solid fa-cart-plus text-sm"></i>
+                <span>Tambah ke Keranjang</span>
+              </button>
+            </div>
+
+            <p class="text-[11px] text-center text-gray-500 mt-2">
+              Pesanan siap diproses via WhatsApp resmi (+62 813-6916-2775) dengan kemasan higienis.
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-brand-border p-5 shadow-xs space-y-3">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-fire-burner text-brand-gold text-base"></i>
+            <h3 class="font-bold text-sm text-brand-cuko">Petunjuk Singkat Penyajian di Rumah</h3>
+          </div>
+          <div id="cooking-guide-content" class="text-xs text-gray-600 space-y-1.5 leading-relaxed"></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Pesan Error -->
+    <div id="error-msg" class="hidden text-center py-20">
+      <i class="fa-solid fa-triangle-exclamation text-4xl text-red-400 mb-4"></i>
+      <h2 class="font-serif text-2xl font-bold text-gray-800 mb-2">Produk Tidak Ditemukan</h2>
+      <p class="text-gray-500 mb-6">Mungkin URL tidak valid atau produk sudah dihapus.</p>
+      <a href="index.html" class="inline-flex items-center gap-2 bg-brand-cuko text-white px-6 py-2.5 rounded-full font-medium hover:bg-brand-gold transition">
+        <i class="fa-solid fa-arrow-left"></i> Kembali ke Katalog
+      </a>
+    </div>
+
+  </main>
+
+  <footer class="mt-auto border-t border-brand-border bg-white py-6">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-500">
+      <div class="flex items-center gap-2">
+        <span class="font-serif font-bold text-brand-cuko">LINNIA</span>
+        <span>•</span>
+        <span>Pempek & Tekwan Ikan Segar Pilihan Asli Palembang</span>
+      </div>
+      <div>
+        &copy; 2026 LINNIA Pempek & Tekwan. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= CART DRAWER (Sama seperti index.html) ================= -->
+  <div id="cart-drawer-backdrop" onclick="toggleCartDrawer(false)" class="fixed inset-0 bg-black/60 z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+  
+  <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-[480px] bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
+    <div class="p-5 bg-brand-cuko text-white flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-basket-shopping text-brand-gold text-lg"></i>
+        <h3 class="font-bold text-base">Pesanan LINNIA Pempek & Tekwan</h3>
+      </div>
+      <button onclick="toggleCartDrawer(false)" class="text-gray-300 hover:text-white p-1">
+        <i class="fa-solid fa-xmark text-xl"></i>
+      </button>
+    </div>
+
+    <div class="flex-1 overflow-y-auto p-5 space-y-4">
+      <div id="cart-items-container" class="space-y-3"></div>
+
+      <!-- Checkout Form -->
+      <div class="pt-6 border-t border-gray-200 space-y-3">
+        <h4 class="font-bold text-xs uppercase text-gray-500 tracking-wider">Data Pengiriman Pesanan</h4>
+        
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1">Nama Pemesan *</label>
+          <input type="text" id="cust-name" placeholder="Contoh: Bunda" class="w-full px-3 py-2 text-xs border rounded-lg focus:outline-none focus:ring-1 focus:ring-brand-gold">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1">Nomor WhatsApp *</label>
+          <input type="tel" id="cust-phone" placeholder="Contoh: 0812345678" class="w-full px-3 py-2 text-xs border rounded-lg focus:outline-none focus:ring-1 focus:ring-brand-gold">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1">Alamat Lengkap / Kota *</label>
+          <textarea id="cust-address" rows="2" placeholder="Nama Jalan, No. Rumah, RT/RW, Kecamatan, Kota" class="w-full px-3 py-2 text-xs border rounded-lg focus:outline-none focus:ring-1 focus:ring-brand-gold"></textarea>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1">Catatan Tambahan (Opsional)</label>
+          <textarea id="cust-notes" rows="2" placeholder="Contoh: Extra Cuko, dll." class="w-full px-3 py-2 text-xs border rounded-lg focus:outline-none focus:ring-1 focus:ring-brand-gold"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-5 border-t border-gray-200 bg-gray-50 space-y-3">
+      <div class="flex justify-between items-center text-sm font-bold">
+        <span>Total Pembelian:</span>
+        <span id="cart-total-price" class="text-brand-gold text-lg">Rp 0</span>
+      </div>
+      <button onclick="processWhatsAppCheckout()" class="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition">
+        <i class="fa-brands fa-whatsapp text-lg"></i>
+        <span>KIRIM PESAN KE WHATSAPP</span>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // ---------------------------------------------------------
+    // DATA MENU (Harus sinkron dengan index.html)
+    // ---------------------------------------------------------
+    const MENU_DATA = [
+      { id: '1', title: 'Pempek Kapal Selam', category: 'pempek', price: 20000, desc: 'Pempek ukuran besar dengan isian telur utuh.', stok: 'Tersedia', img: 'pempek.jpg', tag: 'Favorit Pempek' },
+      { id: '2', title: 'Pempek Lenjer', category: 'pempek', price: 15000, desc: 'Pempek panjang khas Palembang yang kenyal dan gurih.', stok: 'Tersedia', img: 'pempek.jpg', tag: 'Menu Pilihan' },
+      { id: '3', title: 'Tekwan Porsi Personal', category: 'tekwan', price: 25000, desc: 'Sajian tekwan hangat dengan kaldu udang, jamur kuping, dan soun.', stok: 'Tersedia', img: 'tekwan.jpg', tag: 'Best Seller Tekwan' },
+      { id: '4', title: 'Paket Komplit LINNIA', category: 'paket', price: 85000, desc: 'Kombinasi kapal selam, lenjer, dan adaan lengkap dengan cuko.', stok: 'Tersedia', img: 'pempek.jpg', tag: 'Paket Hemat' },
+      { id: '5', title: 'Pempek Kulit Crispy', category: 'pempek', price: 12000, desc: 'Olahan kulit tenggiri yang digoreng garing, super gurih.', stok: 'Stok Menipis', img: 'pempek.jpg', tag: 'Menu Pilihan' },
+      { id: '6', title: 'Pempek Adaan', category: 'pempek', price: 10000, desc: 'Pempek bulat kenyal yang gurih dan harum.', stok: 'Tersedia', img: 'pempek.jpg', tag: 'Menu Pilihan' }
+    ];
+
+    const ADMIN_WA_NUMBER = "62895359511378";
+    
+    // Ambil ID dari URL (contoh: product-detail.html?id=2)
+    const urlParams = new URLSearchParams(window.location.search);
+    let productId = urlParams.get('id');
+    // Jika tidak ada ID, default ke produk pertama
+    if(!productId) productId = '1';
+
+    let currentProductBase = MENU_DATA.find(p => String(p.id) === String(productId));
+    let currentProduct = null;
+
+    let selectedVariantIndex = 0;
+    let quantity = 1;
+    let cart = [];
+
+    function formatRupiah(num) {
+      return "Rp " + Math.round(num).toLocaleString("id-ID");
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      loadCart();
+      updateNavCartCounter();
+      
+      if (!currentProductBase) {
+        document.getElementById('product-container').style.display = 'none';
+        document.getElementById('error-msg').classList.remove('hidden');
+        return;
+      }
+
+      // Bangun struktur detail berdasarkan data dasar
+      const isTekwan = currentProductBase.category.toLowerCase() === 'tekwan';
+      
+      currentProduct = {
+        id: currentProductBase.id,
+        title: currentProductBase.title,
+        category: currentProductBase.category.toUpperCase(),
+        badge: currentProductBase.tag,
+        desc: currentProductBase.desc,
+        basePrice: currentProductBase.price,
+        stockText: currentProductBase.stok,
+        images: [
+          currentProductBase.img,
+          isTekwan ? "tekwan.jpg" : "pempek.jpg",
+          isTekwan ? "pempek.jpg" : "tekwan.jpg",
+          "banner.jpeg"
+        ],
+        contents: isTekwan ? [
+          "1 Pack Butiran Tekwan Tenggiri Vakum",
+          "1 Bungkus Bumbu Kaldu Udang Segar",
+          "1 Porsi Jamur Kuping & Soun",
+          "Taburan Bawang Goreng & Seledri"
+        ] : [
+          "1 Pack Olahan Ikan Segar (Vakum)",
+          "1 Pouch Kuah Cuko Kental Aren",
+          "1 Bungkus Bubuk Ebi Sangrai",
+          "Sambal Cabai Rawit Hijau"
+        ],
+        cookingGuide: isTekwan ? [
+          "1. Didihkan 400ml air dalam panci.",
+          "2. Masukkan bumbu kaldu, aduk merata.",
+          "3. Rebus tekwan beku dan jamur selama 3-4 menit.",
+          "4. Tuang ke mangkuk berisi soun, taburi pelengkap."
+        ] : [
+          "1. Diamkan pempek di suhu ruang.",
+          "2. Panaskan minyak di wajan dengan api sedang.",
+          "3. Goreng pempek hingga kuning keemasan dan renyah.",
+          "4. Potong sesuai selera, siram dengan kuah cuko."
+        ],
+        variants: [
+          { name: "Standar (1 Porsi)", multiplier: 1, labelPrice: formatRupiah(currentProductBase.price), desc: "Porsi pas 1 orang" },
+          { name: "Double Pack (2 Porsi)", multiplier: 1.95, labelPrice: formatRupiah(currentProductBase.price * 1.95), desc: "Porsi berdua lebih hemat" },
+          { name: "Party (4 Porsi)", multiplier: 3.8, labelPrice: formatRupiah(currentProductBase.price * 3.8), desc: "Puas kumpul keluarga" }
+        ]
+      };
+
+      initProductDetail();
+    });
+
+    function initProductDetail() {
+      document.getElementById("breadcrumb-title").textContent = currentProduct.title;
+      document.getElementById("product-title").textContent = currentProduct.title;
+      document.getElementById("product-category-text").textContent = currentProduct.category;
+      document.getElementById("product-description").textContent = currentProduct.desc;
+      document.getElementById("product-stock-status").textContent = currentProduct.stockText;
+      document.getElementById("stock-available").textContent = currentProduct.stockText;
+
+      if(currentProduct.badge) {
+        const badgeEl = document.getElementById("product-badge");
+        badgeEl.textContent = currentProduct.badge;
+        badgeEl.classList.remove('hidden');
+      }
+
+      document.getElementById("main-product-img").src = currentProduct.images[0];
+      
+      // Render Thumbnails
+      const thumbsContainer = document.getElementById("thumbnails-container");
+      thumbsContainer.innerHTML = '';
+      currentProduct.images.forEach((img, index) => {
+        const btn = document.createElement('button');
+        btn.onclick = () => changeMainImage(index);
+        btn.className = `thumb-btn border rounded-xl overflow-hidden aspect-square bg-white p-1 transition ${index === 0 ? 'border-brand-cuko border-2' : 'border-brand-border hover:border-brand-cuko'}`;
+        btn.innerHTML = `<img src="${img}" onerror="this.src='pempek.jpg'" class="w-full h-full object-cover rounded-lg">`;
+        thumbsContainer.appendChild(btn);
+      });
+
+      const contentsContainer = document.getElementById("package-contents-list");
+      contentsContainer.innerHTML = "";
+      currentProduct.contents.forEach(item => {
+        contentsContainer.innerHTML += `<li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-gold text-[11px] mt-0.5 shrink-0"></i><span>${item}</span></li>`;
+      });
+
+      const guideContainer = document.getElementById("cooking-guide-content");
+      guideContainer.innerHTML = "";
+      currentProduct.cookingGuide.forEach(step => {
+        guideContainer.innerHTML += `<p>${step}</p>`;
+      });
+
+      renderVariants();
+      recalculatePrices();
+      
+      // Fade in
+      document.getElementById('product-container').classList.remove('opacity-0');
+    }
+
+    function renderVariants() {
+      const container = document.getElementById("variant-selector-container");
+      container.innerHTML = "";
+
+      currentProduct.variants.forEach((v, index) => {
+        const isSelected = index === selectedVariantIndex;
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.onclick = () => selectVariant(index);
+        btn.className = `p-3 rounded-xl border text-left transition flex flex-col justify-between ${
+          isSelected ? "border-brand-cuko bg-brand-creamSoft ring-1 ring-brand-cuko" : "border-brand-border bg-white hover:border-brand-cuko/50"
+        }`;
+        btn.innerHTML = `
+          <div class="text-[11px] font-bold text-brand-cuko mb-0.5">${v.name}</div>
+          <div class="text-[10px] text-gray-500 mb-2">${v.desc}</div>
+          <div class="text-xs font-bold text-brand-gold">${v.labelPrice}</div>
+        `;
+        container.appendChild(btn);
+      });
+    }
+
+    function selectVariant(index) {
+      selectedVariantIndex = index;
+      renderVariants();
+      recalculatePrices();
+    }
+
+    function recalculatePrices() {
+      const variant = currentProduct.variants[selectedVariantIndex];
+      const unitPrice = Math.round(currentProduct.basePrice * variant.multiplier);
+      const subtotal = unitPrice * quantity;
+
+      document.getElementById("display-price").textContent = formatRupiah(unitPrice);
+      document.getElementById("display-subtotal").textContent = formatRupiah(subtotal);
+    }
+
+    function updateQty(delta) {
+      let newQty = quantity + delta;
+      if (newQty < 1) newQty = 1;
+      if (newQty > 50) newQty = 50;
+      quantity = newQty;
+      document.getElementById("qty-input").value = quantity;
+      recalculatePrices();
+    }
+
+    function validateManualQty(val) {
+      let parsed = parseInt(val, 10);
+      if (isNaN(parsed) || parsed < 1) parsed = 1;
+      if (parsed > 50) parsed = 50;
+      quantity = parsed;
+      document.getElementById("qty-input").value = quantity;
+      recalculatePrices();
+    }
+
+    function changeMainImage(index) {
+      document.getElementById("main-product-img").src = currentProduct.images[index];
+      const buttons = document.querySelectorAll(".thumb-btn");
+      buttons.forEach((b, i) => {
+        if (i === index) {
+          b.classList.add("border-brand-cuko", "border-2");
+          b.classList.remove("border-brand-border");
+        } else {
+          b.classList.remove("border-brand-cuko", "border-2");
+          b.classList.add("border-brand-border");
+        }
+      });
+    }
+
+    // --- CART LOGIC ---
+    function loadCart() {
+      try {
+        const stored = localStorage.getItem("linnia_cart");
+        if (stored) cart = JSON.parse(stored);
+      } catch(e) { cart = []; }
+    }
+
+    function updateNavCartCounter() {
+      const badge = document.getElementById("nav-cart-counter");
+      const totalQty = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+      badge.textContent = totalQty;
+      renderCartDrawerItems();
+    }
+
+    function handleAddToCart() {
+      const variant = currentProduct.variants[selectedVariantIndex];
+      const unitPrice = Math.round(currentProduct.basePrice * variant.multiplier);
+      const fullTitle = `${currentProduct.title} (${variant.name})`;
+
+      const existingIndex = cart.findIndex(item => item.id === `${currentProduct.id}-${selectedVariantIndex}`);
+      if (existingIndex > -1) {
+        cart[existingIndex].qty += quantity;
+      } else {
+        cart.push({
+          id: `${currentProduct.id}-${selectedVariantIndex}`,
+          title: fullTitle,
+          price: unitPrice,
+          qty: quantity,
+          img: currentProduct.images[0]
+        });
+      }
+
+      localStorage.setItem("linnia_cart", JSON.stringify(cart));
+      updateNavCartCounter();
+
+      const toast = document.getElementById("toast-notify");
+      document.getElementById("toast-text").textContent = `Berhasil ditambahkan ke keranjang!`;
+      toast.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      setTimeout(() => toast.classList.add("hidden"), 4000);
+    }
+
+    // Drawer Logic (Sama dengan index)
+    function toggleCartDrawer(open) {
+      const drawer = document.getElementById("cart-drawer");
+      const backdrop = document.getElementById("cart-drawer-backdrop");
+      if (open) {
+        drawer.classList.remove("translate-x-full");
+        backdrop.classList.remove("opacity-0", "pointer-events-none");
+      } else {
+        drawer.classList.add("translate-x-full");
+        backdrop.classList.add("opacity-0", "pointer-events-none");
+      }
+    }
+
+    function modifyCartQty(id, delta) {
+      const index = cart.findIndex(i => String(i.id) === String(id));
+      if (index !== -1) {
+        cart[index].qty += delta;
+        if (cart[index].qty <= 0) cart.splice(index, 1);
+      }
+      localStorage.setItem("linnia_cart", JSON.stringify(cart));
+      updateNavCartCounter();
+    }
+
+    function renderCartDrawerItems() {
+      const container = document.getElementById("cart-items-container");
+      const totalDisplay = document.getElementById("cart-total-price");
+
+      const totalPrice = cart.reduce((sum, item) => sum + ((item.qty || 1) * item.price), 0);
+      if (totalDisplay) totalDisplay.innerText = formatRupiah(totalPrice);
+
+      if (!container) return;
+      if (cart.length === 0) {
+        container.innerHTML = `<div class="text-center py-10 text-gray-400"><p class="text-xs">Keranjang masih kosong.</p></div>`;
+        return;
+      }
+
+      container.innerHTML = cart.map(item => `
+        <div class="p-3 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-between text-xs">
+          <div class="pr-2">
+            <div class="font-bold text-gray-800">${item.title}</div>
+            <div class="text-brand-gold font-semibold">${formatRupiah(item.price)}</div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="modifyCartQty('${item.id}', -1)" class="w-6 h-6 rounded bg-white border border-gray-300 font-bold">-</button>
+            <span class="font-bold">${item.qty}</span>
+            <button onclick="modifyCartQty('${item.id}', 1)" class="w-6 h-6 rounded bg-brand-cuko text-white font-bold">+</button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function processWhatsAppCheckout() {
+      if (cart.length === 0) return alert("Keranjang kosong.");
+      const name = document.getElementById("cust-name").value.trim();
+      const phone = document.getElementById("cust-phone").value.trim();
+      const address = document.getElementById("cust-address").value.trim();
+      const notes = document.getElementById("cust-notes").value.trim();
+
+      if (!name || !phone || !address) return alert("Lengkapi Nama, No WA, dan Alamat.");
+
+      let totalAmount = 0;
+      let orderItemsText = "";
+      cart.forEach(item => {
+        const sub = item.qty * item.price;
+        totalAmount += sub;
+        orderItemsText += `- ${item.qty}x ${item.title} (Rp ${sub.toLocaleString("id-ID")})\n`;
+      });
+
+      const msg = `🛒 *PESANAN LINNIA*\n\n👤 *Pemesan:*\n• Nama: ${name}\n• WA: ${phone}\n• Alamat: ${address}\n• Catatan: ${notes || '-'}\n\n📦 *Rincian:*\n${orderItemsText}\n💰 *Total: Rp ${totalAmount.toLocaleString("id-ID")}*`;
+      window.open(`https://wa.me/${ADMIN_WA_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
+    }
+  </script>
+</body>
+</html>

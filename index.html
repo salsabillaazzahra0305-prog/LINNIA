@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LINNIA Pempek dan Tekwan | Cita Rasa Asli Gurih & Legit</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              cuko: '#38160D',
+              cukoDark: '#230E08',
+              gold: '#D97706',
+              goldLight: '#F59E0B',
+              cream: '#FDFBF7',
+              surface: '#F6EFE6',
+              charcoal: '#1F2937'
+            }
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .glass-nav {
+      background: rgba(253, 251, 247, 0.95);
+      backdrop-filter: blur(12px);
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background-color: #D97706;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+
+<body
+  class="bg-brand-cream text-brand-charcoal font-sans antialiased overflow-x-hidden selection:bg-brand-gold selection:text-white">
+
+  <!-- ================= TOP ANNOUNCEMENT BAR ================= -->
+  <div class="bg-brand-cukoDark text-amber-100/90 text-xs py-2 px-4">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center gap-2">
+        <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+        <span class="font-medium">LINNIA: Pempek dan Tekwan Asli Gurih & Legit</span>
+      </div>
+      <div class="flex items-center gap-2.5">
+        <span
+          class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/80 text-emerald-300 border border-emerald-500/30 text-[11px] font-semibold">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Siap Menerima Pesanan
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= NAVBAR ================= -->
+  <nav class="sticky top-0 z-40 glass-nav border-b border-brand-cuko/10 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <!-- Logo Brand -->
+      <a href="index.html" class="flex items-center gap-3 group">
+        <img src="logo.jpg.jpeg" onerror="this.src='https://via.placeholder.com/50'" alt="Logo LINNIA"
+          class="h-12 w-12 object-cover rounded-full shadow-sm border border-amber-200 group-hover:scale-105 transition duration-300">
+        <div>
+          <span class="block font-serif font-bold text-2xl text-brand-cuko tracking-tight leading-none">LINNIA</span>
+          <span class="text-[10px] tracking-[0.24em] font-semibold text-brand-gold uppercase">Pempek & Tekwan</span>
+        </div>
+      </a>
+
+      <!-- Menu Navigasi -->
+      <div class="hidden md:flex items-center gap-7 font-medium text-sm text-brand-charcoal/80">
+        <a href="#keunggulan" class="hover:text-brand-gold transition">Keunggulan</a>
+        <a href="#menu" class="hover:text-brand-gold transition">Katalog Menu</a>
+        <a href="#faq" class="hover:text-brand-gold transition">FAQ</a>
+      </div>
+
+      <!-- Action Button & Cart -->
+      <div class="flex items-center gap-3">
+        <button onclick="toggleCartDrawer(true)"
+          class="relative p-2.5 rounded-full bg-brand-surface text-brand-cuko hover:bg-brand-gold hover:text-white transition shadow-sm">
+          <i class="fa-solid fa-bag-shopping text-lg"></i>
+          <span id="cart-counter"
+            class="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ================= HERO SECTION ================= -->
+  <section class="relative overflow-hidden pt-12 pb-16 lg:py-20 bg-gradient-to-b from-brand-surface/50 to-brand-cream">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-7 space-y-6">
+        <h1 class="font-serif text-4xl sm:text-6xl text-brand-cuko font-bold leading-[1.15]">
+          Hangatnya Tekwan, <br><span class="italic text-brand-gold font-normal font-serif">Legitnya Pempek</span> Asli
+          LINNIA.
+        </h1>
+        <p class="text-base sm:text-lg text-gray-600 max-w-xl leading-relaxed">
+          Nikmati olahan ikan segar berkualitas tanpa bahan pengawet. Rasakan renyahnya pempek dengan siraman cuko khas
+          yang kental bercita rasa asam pedas manis yang tak tertandingi, serta hangatnya semangkuk tekwan dengan kuah
+          kaldu gurih yang sedap.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-wrap items-center gap-4 pt-2">
+          <a href="#menu"
+            class="px-7 py-3.5 rounded-full bg-brand-cuko hover:bg-brand-cukoDark text-white font-semibold text-sm shadow-xl hover:-translate-y-0.5 transition duration-200 flex items-center gap-2">
+            <i class="fa-solid fa-utensils"></i> Lihat Menu Lengkap
+          </a>
+          <a href="https://wa.me/6281369162775?text=Halo%20Admin%20LINNIA,%20saya%20mau%20tanya%20menu%20pempek%20dan%20tekwan"
+            target="_blank"
+            class="px-7 py-3.5 rounded-full bg-emerald-700 hover:bg-emerald-800 text-white font-semibold text-sm shadow-lg hover:-translate-y-0.5 transition duration-200 flex items-center gap-2">
+            <i class="fa-brands fa-whatsapp text-lg"></i> Pesan Cepat via WA
+          </a>
+        </div>
+      </div>
+
+      <!-- Hero Banner Image Card -->
+      <div class="lg:col-span-5 relative">
+        <div
+          class="hidden sm:flex absolute -top-4 -right-4 bg-white p-3 rounded-2xl shadow-lg border border-amber-100 items-center gap-2.5 z-20">
+          <div class="w-9 h-9 rounded-xl bg-amber-100 text-brand-gold flex items-center justify-center text-base">
+            <i class="fa-solid fa-fish"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-bold text-gray-800">100% Ikan Segar</div>
+            <div class="text-[10px] text-gray-500">Gurih murni tanpa pengawet</div>
+          </div>
+        </div>
+
+        <div class="relative mx-auto max-w-md rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-white">
+          <img src="banner.jpeg"
+            onerror="this.src='https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=800&q=80'"
+            alt="LINNIA Pempek dan Tekwan" class="w-full h-96 object-cover hover:scale-105 transition duration-500">
+
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-brand-cukoDark/90 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
+            <span class="text-xs uppercase tracking-widest text-amber-300 font-bold">Menu Unggulan</span>
+            <h3 class="font-serif text-2xl font-bold">Paket Komplit LINNIA</h3>
+            <p class="text-xs text-amber-100/90 mt-1">Pempek Lenjer, Pempek Selam, Pempek Kulit yang dilengkapi cuko
+              kental yang khas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= KEUNGGULAN ================= -->
+  <section id="keunggulan" class="pt-12 pb-6 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="text-xs font-bold uppercase tracking-widest text-brand-gold">Kualitas Terbaik Dari Dapur
+          Kami</span>
+        <h2 class="font-serif text-3xl font-bold text-brand-cuko mt-1">Kenapa Harus LINNIA Pempek & Tekwan?</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div
+          class="p-6 rounded-2xl bg-brand-cream border border-brand-cuko/5 hover:border-brand-gold/40 transition hover:shadow-md">
+          <div class="w-12 h-12 rounded-xl bg-brand-cuko text-brand-gold flex items-center justify-center text-xl mb-4">
+            <i class="fa-solid fa-fish"></i>
+          </div>
+          <h3 class="font-bold text-gray-900 mb-2">100% Ikan Segar</h3>
+          <p class="text-xs text-gray-600 leading-relaxed">Dibuat dari daging ikan segar tanpa campuran perasa buatan
+            atau pemutih kimia.</p>
+        </div>
+
+        <div
+          class="p-6 rounded-2xl bg-brand-cream border border-brand-cuko/5 hover:border-brand-gold/40 transition hover:shadow-md">
+          <div class="w-12 h-12 rounded-xl bg-brand-cuko text-brand-gold flex items-center justify-center text-xl mb-4">
+            <i class="fa-solid fa-bowl-food"></i>
+          </div>
+          <h3 class="font-bold text-gray-900 mb-2">Bumbu Kaldu Tekwan Gurih</h3>
+          <p class="text-xs text-gray-600 leading-relaxed">Racikan kaldu alami berpadu jamur kuping, sedap malam,
+            dan irisan bawang goreng.</p>
+        </div>
+
+        <div
+          class="p-6 rounded-2xl bg-brand-cream border border-brand-cuko/5 hover:border-brand-gold/40 transition hover:shadow-md">
+          <div class="w-12 h-12 rounded-xl bg-brand-cuko text-brand-gold flex items-center justify-center text-xl mb-4">
+            <i class="fa-solid fa-jar"></i>
+          </div>
+          <h3 class="font-bold text-gray-900 mb-2">Cuko Gula Batok Aren</h3>
+          <p class="text-xs text-gray-600 leading-relaxed">Cuko pekat kental dengan rasa asam pedas manis yang ramah di
+            lambung dan harum alami gula aren.</p>
+        </div>
+
+        <div
+          class="p-6 rounded-2xl bg-brand-cream border border-brand-cuko/5 hover:border-brand-gold/40 transition hover:shadow-md">
+          <div class="w-12 h-12 rounded-xl bg-brand-cuko text-brand-gold flex items-center justify-center text-xl mb-4">
+            <i class="fa-solid fa-snowflake"></i>
+          </div>
+          <h3 class="font-bold text-gray-900 mb-2">Frozen Pack</h3>
+          <p class="text-xs text-gray-600 leading-relaxed">Kemasan vakum kedap udara membuat produk siap dikirim aman ke
+            berbagai kota.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DAFTAR MENU ================= -->
+  <section id="menu" class="pt-6 pb-14 bg-brand-cream">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div>
+          <h2 class="font-serif text-3xl font-bold text-brand-cuko mt-1">Daftar Menu LINNIA</h2>
+        </div>
+        <div class="flex flex-wrap gap-2 text-xs font-medium" id="category-tabs">
+          <button onclick="filterMenu('all', this)"
+            class="menu-tab px-4 py-2 rounded-full bg-brand-cuko text-white transition">Semua Menu</button>
+          <button onclick="filterMenu('pempek', this)"
+            class="menu-tab px-4 py-2 rounded-full bg-white text-gray-700 hover:bg-brand-surface transition">Pempek</button>
+          <button onclick="filterMenu('tekwan', this)"
+            class="menu-tab px-4 py-2 rounded-full bg-white text-gray-700 hover:bg-brand-surface transition">Tekwan</button>
+          <button onclick="filterMenu('paket', this)"
+            class="menu-tab px-4 py-2 rounded-full bg-white text-gray-700 hover:bg-brand-surface transition">Paket
+            Komplit</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="menu-grid">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ SECTION ================= -->
+  <section id="faq" class="py-14 bg-brand-cream border-t border-brand-cuko/10">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="font-serif text-3xl font-bold text-center text-brand-cuko mb-8">Pertanyaan Seputar LINNIA</h2>
+      <div class="space-y-3">
+
+        <details class="group bg-white p-4 rounded-xl shadow-sm border border-gray-200">
+          <summary
+            class="flex justify-between items-center font-semibold text-sm cursor-pointer list-none text-gray-800">
+            <span>Bagaimana cara penyajian Pempek LINNIA (frozen)?</span>
+            <span class="group-open:rotate-180 transition"><i class="fa-solid fa-chevron-down text-xs"></i></span>
+          </summary>
+          <p class="mt-3 text-xs text-gray-600 leading-relaxed">
+            Keluarkan pempek dari freezer dan diamkan di suhu ruang hingga tidak beku. Setelah itu, goreng di minyak
+            panas dengan api sedang hingga berwarna kuning keemasan dan kulitnya renyah. Sajikan hangat bersama siraman
+            kuah cuko khas LINNIA.
+          </p>
+        </details>
+
+        <details class="group bg-white p-4 rounded-xl shadow-sm border border-gray-200">
+          <summary
+            class="flex justify-between items-center font-semibold text-sm cursor-pointer list-none text-gray-800">
+            <span>Bagaimana penyajian Tekwan beku (frozen pack)?</span>
+            <span class="group-open:rotate-180 transition"><i class="fa-solid fa-chevron-down text-xs"></i></span>
+          </summary>
+          <p class="mt-3 text-xs text-gray-600 leading-relaxed">
+            Rebus air secukupnya hingga mendidih, masukkan bumbu kaldu tekwan LINNIA beserta butiran tekwan, jamur
+            kuping, dan pelengkap. Masak selama 3–5 menit hingga butiran mengapung, lalu taburi soun dan bawang goreng
+            hangat sebelum dinikmati.
+          </p>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-brand-cukoDark text-white pt-16 pb-12 border-t border-brand-gold/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-12 gap-10 mb-12 items-start">
+      <div class="md:col-span-7 space-y-4">
+        <div>
+          <span class="font-serif font-bold text-3xl text-white tracking-wide">LINNIA</span>
+          <span class="block text-[11px] uppercase tracking-[0.2em] text-brand-gold font-semibold mt-1">Pempek &
+            Tekwan</span>
+        </div>
+        <p class="text-xs text-gray-400 leading-relaxed max-w-lg">
+          Pempek & Tekwan Ikan segar pilihan dengan resep bumbu istimewa yang pastinya enak, dan higienis.
+        </p>
+        <div class="pt-2">
+          <a href="https://wa.me/6281369162775" target="_blank"
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-brand-gold hover:bg-brand-gold hover:text-white transition">
+            <i class="fa-brands fa-whatsapp text-base"></i>
+            <span class="text-xs font-medium">Hubungi Admin LINNIA (WhatsApp)</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="md:col-span-5 space-y-3">
+        <h4 class="font-bold text-sm text-amber-300 uppercase tracking-wider">Lokasi LINNIA</h4>
+        <a href="https://www.google.com/maps/search/?api=1&query=5°24'17.8%22S+105°14'52.1%22E" target="_blank"
+          class="block rounded-2xl overflow-hidden h-36 bg-white/5 border border-white/10 flex items-center justify-center text-xs text-gray-400 p-5 text-center hover:border-brand-gold/40 hover:bg-white/10 transition cursor-pointer">
+          <div>
+            <i class="fa-solid fa-location-dot text-3xl text-brand-gold mb-2"></i>
+            <p class="text-gray-200 font-medium">Buka Petunjuk Arah di Google Maps</p>
+            <p class="text-[11px] text-gray-400 mt-1">Dapur Produksi LINNIA</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="max-w-7xl mx-auto px-4 text-center border-t border-white/10 pt-6 text-[11px] text-gray-500">
+      &copy; 2026 LINNIA Pempek & Tekwan. All Rights Reserved.
+    </div>
+  </footer>
+
+  <!-- ================= FLOATING ACTION & WHATSAPP BUTTON ================= -->
+  <div class="fixed bottom-6 right-6 z-30 flex flex-col gap-3">
+    <button onclick="toggleCartDrawer(true)"
+      class="w-12 h-12 bg-brand-cuko text-amber-300 rounded-full shadow-2xl hover:scale-110 transition flex items-center justify-center relative">
+      <i class="fa-solid fa-bag-shopping text-lg"></i>
+      <span id="floating-cart-badge"
+        class="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+    </button>
+    <a href="https://wa.me/6281369162775" target="_blank"
+      class="w-12 h-12 bg-emerald-600 hover:bg-emerald-500 text-white rounded-full shadow-2xl hover:scale-110 transition flex items-center justify-center">
+      <i class="fa-brands fa-whatsapp text-2xl"></i>
+    </a>
+  </div>
+
+  <!-- ================= CART DRAWER ================= -->
+  <div id="cart-drawer-backdrop" onclick="toggleCartDrawer(false)"
+    class="fixed inset-0 bg-black/60 z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+
+  <div id="cart-drawer"
+    class="fixed top-0 right-0 h-full w-full sm:w-[480px] bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
+    <div class="p-5 bg-brand-cuko text-white flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-basket-shopping text-brand-gold text-lg"></i>
+        <h3 class="font-bold text-base">Pesanan LINNIA Pempek & Tekwan</h3>
+      </div>
+      <button onclick="toggleCartDrawer(false)" class="text-gray-300 hover:text-white p-1">
+        <i class="fa-solid fa-xmark text-xl"></i>
+      </button>
+    </div>
+
+    <div class="flex-1 overflow-y-auto p-5 space-y-4 custom-scrollbar">
+      <div id="cart-items-container" class="space-y-3"></div>
+
+      <!-- Checkout Form -->
+      <div class="pt-6 border-t border-gray-200 space-y-3">
+        <h4 class="font-bold text-xs uppercase text-gray-500 tracking-wider">Data Pengiriman Pesanan</h4>
+
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1">Nama Pemesan *</label>
+          <input type="text" id="cust-name" placeholder="Contoh: Bunda"
+            class="w-full px-3 py-2 text-xs border rounded-lg focus:outline-none focus:ring-1 focus:ring-brand-gold">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1">Nomor WhatsApp *</label>
+          <input type="tel" id="cust-phone" placeholder="Contoh: 0812345678"
+            class="w-full px-3 py-2 text-xs border rounded-lg focus:outline-none focus:ring-1 focus:ring-brand-gold">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1">Alamat Lengkap / Kota *</label>
+          <textarea id="cust-address" rows="2" placeholder="Nama Jalan, No. Rumah, RT/RW, Kecamatan, Kota"
+            class="w-full px-3 py-2 text-xs border rounded-lg focus:outline-none focus:ring-1 focus:ring-brand-gold"></textarea>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1">Pilihan Kemasan</label>
+          <input type="text" id="cust-package-type" value="Frozen Pack (Kemasan Vakum Beku)" readonly
+            class="w-full px-3 py-2 text-xs border rounded-lg bg-gray-100 text-gray-700 font-medium cursor-not-allowed focus:outline-none">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1">Catatan Tambahan (Opsional)</label>
+          <textarea id="cust-notes" rows="2" placeholder="Contoh: Extra Cuko, dll."
+            class="w-full px-3 py-2 text-xs border rounded-lg focus:outline-none focus:ring-1 focus:ring-brand-gold"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Checkout Action Button -->
+    <div class="p-5 border-t border-gray-200 bg-gray-50 space-y-3">
+      <div class="flex justify-between items-center text-sm font-bold">
+        <span>Total Pembelian:</span>
+        <span id="cart-total-price" class="text-brand-gold text-lg">Rp 0</span>
+      </div>
+      <button onclick="processWhatsAppCheckout()"
+        class="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition">
+        <i class="fa-brands fa-whatsapp text-lg"></i>
+        <span>KIRIM PESANAN KE WHATSAPP LINNIA</span>
+      </button>
+      <p class="text-[10px] text-center text-gray-500">Pesan otomatis terformat rapi dan langsung terhubung ke WhatsApp
+        penjual.</p>
+    </div>
+  </div>
+
+  <!-- ================= JAVASCRIPT ================= -->
+  <script>
+    // Nomor WhatsApp Toko LINNIA
+    const ADMIN_WA_NUMBER = "62895359511378";
+
+    // ---------------------------------------------------------
+    // DATA MENU MANUAL (Ganti tulisan dan harga di sini jika ingin mengubah menu)
+    // ---------------------------------------------------------
+    const MENU_DATA = [
+      { id: '3', title: 'Paket Komplit Tekwan LINNIA', category: 'tekwan', price: 25000, desc: 'Tekwan dari olahan ikan segar pilihan dengan tekstur kenyal yang pas. Disiram kuah kaldu rempah khas LINNIA, lengkap dengan isian jamur kuping, bunga sedap malam, soun, dan taburan bawang goreng.', stok: 'Tersedia', img: 'tekwan.jpg', tag: 'Best Seller Tekwan' },
+      { id: '4', title: 'Paket Komplit Pempek LINNIA', category: 'paket', price: 35000, desc: 'Satu paket komplit berisi 15 buah pempek campur. Terdiri dari varian Lenjer, Telur, Keju, Adaan, dan Kulit. Dikemas secara higienis (vakum) dan sudah termasuk kuah cuko kental khas LINNIA.', stok: 'Tersedia', img: 'paket pempek.jpg', tag: 'Best Seller Pempek' },
+    ];
+
+    let cart = [];
+    try {
+      const stored = localStorage.getItem("linnia_cart");
+      if (stored) cart = JSON.parse(stored);
+    } catch (e) {
+      cart = [];
+    }
+
+    let customBoxSelection = {};
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderMenuCards(MENU_DATA);
+      updateCartDisplay();
+    });
+
+    // Render Menu Dinamis
+    function renderMenuCards(items) {
+      const container = document.getElementById("menu-grid");
+      if (!container) return;
+      container.innerHTML = "";
+
+      if (!items || items.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-12 text-center text-gray-500">
+            <i class="fa-solid fa-box-open text-4xl text-gray-300 mb-3"></i>
+            <p class="font-bold text-sm">Belum ada menu di kategori ini.</p>
+          </div>
+        `;
+        return;
+      }
+
+      items.forEach(item => {
+        const detailUrl = `product-detail.html?id=${item.id}`;
+        const safeTitle = (item.title || "").replace(/'/g, "\\'");
+        const safeImg = (item.img || "pempek.jpg").replace(/'/g, "\\'");
+
+        let stockBadge = "";
+        if (item.stok && item.stok.toLowerCase().includes("habis")) {
+          stockBadge = `<span class="bg-red-600/90 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">${item.stok}</span>`;
+        } else if (item.stok && item.stok.toLowerCase().includes("menipis")) {
+          stockBadge = `<span class="bg-amber-600/90 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">${item.stok}</span>`;
+        }
+
+        const card = document.createElement("div");
+        card.className = "bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition flex flex-col group";
+        
+        // PENTING: Perubahan object-cover jadi object-contain ada di baris <img ...> di bawah ini
+        card.innerHTML = `
+          <!-- Foto Menu -->
+          <a href="${detailUrl}" class="block relative h-64 sm:h-72 overflow-hidden bg-brand-creamSoft flex items-center justify-center cursor-pointer">
+            <img src="${item.img}" onerror="this.src='pempek.jpg'" alt="${item.title}" class="w-full h-full object-contain p-2 group-hover:scale-105 transition duration-300">
+            <div class="absolute top-3 left-3 flex flex-col gap-1.5 z-10 items-start">
+              <span class="bg-[#2B1408]/90 text-amber-300 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm">${item.tag}</span>
+              ${stockBadge}
+            </div>
+          </a>
+
+          <!-- Deskripsi & Judul -->
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <a href="${detailUrl}" class="block hover:text-[#C07A23] transition">
+                <h3 class="font-bold text-gray-900 text-sm mb-1">${item.title}</h3>
+              </a>
+              <p class="text-xs text-gray-500 leading-relaxed mb-3 line-clamp-2">${item.desc}</p>
+            </div>
+            <div class="pt-3 border-t border-gray-100 flex items-center justify-between">
+              <span class="font-bold text-sm text-[#C07A23]">Rp ${Number(item.price).toLocaleString("id-ID")}</span>
+              
+              <!-- Tombol Tambah -->
+              <div class="flex items-center gap-1.5">
+                <button onclick="addToCart('${item.id}', '${safeTitle}', ${item.price}, '${safeImg}')" class="px-5 py-2 rounded-lg bg-brand-cuko hover:bg-[#1E0E05] text-amber-300 text-xs font-bold transition flex items-center gap-2" title="Tambah ke Keranjang">
+                  <i class="fa-solid fa-cart-plus"></i> Tambah
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // Filter Menu Berdasarkan Kategori
+    function filterMenu(category, btnElement) {
+      document.querySelectorAll(".menu-tab").forEach(btn => {
+        btn.classList.remove("bg-brand-cuko", "text-white");
+        btn.classList.add("bg-white", "text-gray-700");
+      });
+      btnElement.classList.add("bg-brand-cuko", "text-white");
+      btnElement.classList.remove("bg-white", "text-gray-700");
+
+      if (category === "all") {
+        renderMenuCards(MENU_DATA);
+      } else {
+        const filtered = MENU_DATA.filter(item => {
+          if (!item.category) return false;
+          return item.category.toLowerCase() === category.toLowerCase();
+        });
+        renderMenuCards(filtered);
+      }
+    }
+
+    // Drawer & Cart Handling
+    function toggleCartDrawer(open) {
+      const drawer = document.getElementById("cart-drawer");
+      const backdrop = document.getElementById("cart-drawer-backdrop");
+      if (!drawer || !backdrop) return;
+
+      if (open) {
+        drawer.classList.remove("translate-x-full");
+        backdrop.classList.remove("opacity-0", "pointer-events-none");
+      } else {
+        drawer.classList.add("translate-x-full");
+        backdrop.classList.add("opacity-0", "pointer-events-none");
+      }
+    }
+
+    function addToCart(id, title, price, img) {
+      const existing = cart.find(i => String(i.id) === String(id));
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({
+          id: id,
+          title: title,
+          price: price,
+          qty: 1,
+          img: img || 'pempek.jpg'
+        });
+      }
+      try {
+        localStorage.setItem("linnia_cart", JSON.stringify(cart));
+      } catch (e) { }
+      updateCartDisplay();
+      
+      // Buka drawer saat tambah barang
+      toggleCartDrawer(true);
+    }
+
+    function modifyCartQty(id, delta) {
+      const index = cart.findIndex(i => String(i.id) === String(id));
+      if (index !== -1) {
+        cart[index].qty += delta;
+        if (cart[index].qty <= 0) {
+          cart.splice(index, 1);
+        }
+      }
+      try {
+        localStorage.setItem("linnia_cart", JSON.stringify(cart));
+      } catch (e) { }
+      updateCartDisplay();
+    }
+
+    function updateCartDisplay() {
+      const container = document.getElementById("cart-items-container");
+      const counter = document.getElementById("cart-counter");
+      const floatBadge = document.getElementById("floating-cart-badge");
+      const totalDisplay = document.getElementById("cart-total-price");
+
+      const totalQty = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+      const totalPrice = cart.reduce((sum, item) => sum + ((item.qty || 1) * item.price), 0);
+
+      if (counter) counter.innerText = totalQty;
+      if (floatBadge) floatBadge.innerText = totalQty;
+      if (totalDisplay) totalDisplay.innerText = `Rp ${totalPrice.toLocaleString("id-ID")}`;
+
+      if (!container) return;
+
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-10 text-gray-400">
+            <i class="fa-solid fa-basket-shopping text-4xl mb-2 text-gray-300"></i>
+            <p class="text-xs">Keranjang Anda masih kosong.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = cart.map(item => `
+        <div class="p-3 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-between text-xs">
+          <div class="pr-2">
+            <div class="font-bold text-gray-800">${item.title}</div>
+            <div class="text-brand-gold font-semibold">Rp ${item.price.toLocaleString("id-ID")}</div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="modifyCartQty('${item.id}', -1)" class="w-6 h-6 rounded bg-white border border-gray-300 font-bold hover:bg-gray-100">-</button>
+            <span class="font-bold">${item.qty}</span>
+            <button onclick="modifyCartQty('${item.id}', 1)" class="w-6 h-6 rounded bg-brand-cuko text-white font-bold hover:bg-brand-cukoDark">+</button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    // WhatsApp Checkout
+    function processWhatsAppCheckout() {
+      if (!cart || cart.length === 0) {
+        alert("Keranjang pesanan Anda masih kosong.");
+        return;
+      }
+
+      const nameEl = document.getElementById("cust-name");
+      const phoneEl = document.getElementById("cust-phone");
+      const addrEl = document.getElementById("cust-address");
+      const notesEl = document.getElementById("cust-notes");
+
+      const name = nameEl ? nameEl.value.trim() : "";
+      const phone = phoneEl ? phoneEl.value.trim() : "";
+      const address = addrEl ? addrEl.value.trim() : "";
+      const notes = notesEl ? notesEl.value.trim() : "";
+
+      if (!name || !phone || !address) {
+        alert("Harap lengkapi Nama, Nomor WhatsApp, dan Alamat Pengiriman terlebih dahulu.");
+        return;
+      }
+
+      let totalAmount = 0;
+      let orderItemsText = "";
+
+      cart.forEach(item => {
+        const subtotal = item.qty * item.price;
+        totalAmount += subtotal;
+        orderItemsText += `- ${item.qty}x ${item.title} (Rp ${subtotal.toLocaleString("id-ID")})\n`;
+      });
+
+      const rawMessage =
+        ` *FORM PESANAN LINNIA PEMPEK & TEKWAN*
+--------------------------------------------------
+ *Data Pemesan:*
+• Nama: ${name}
+• No. HP / WA: ${phone}
+• Alamat: ${address}
+• Catatan: ${notes ? notes : '-'}
+
+ *Rincian Pesanan:*
+${orderItemsText}
+--------------------------------------------------
+ *Total Pembelian:* Rp ${totalAmount.toLocaleString("id-ID")}
+--------------------------------------------------
+_Halo Admin LINNIA, saya ingin memesan menu di atas. Mohon konfirmasi ketersediaan stok dan total ongkos kirimnya ya. Terima kasih!_`;
+
+      const encodedMessage = encodeURIComponent(rawMessage);
+      const whatsappURL = `https://wa.me/${ADMIN_WA_NUMBER}?text=${encodedMessage}`;
+
+      window.open(whatsappURL, "_blank");
+    }
+  </script>
+</body>
+
+</html>
