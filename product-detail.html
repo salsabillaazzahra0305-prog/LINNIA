@@ -113,10 +113,9 @@
           <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-brand-creamSoft flex items-center justify-center">
             <img 
               id="main-product-img" 
-              src="pempek.jpg" 
+              src="" 
               alt="Produk LINNIA" 
-              onerror="this.src='pempek.jpg'" 
-              class="w-full h-full object-cover transition duration-300"
+              class="w-full h-full object-contain p-2 transition duration-300"
             >
             <div class="absolute top-3 left-3 flex flex-col gap-1.5 items-start">
               <span id="product-badge" class="px-3 py-1 rounded-full bg-brand-cuko text-amber-300 text-[10px] font-bold uppercase tracking-wider shadow-sm hidden">
@@ -131,10 +130,6 @@
               <i class="fa-solid fa-snowflake text-cyan-300"></i> Frozen Vacuum Sealed
             </span>
           </div>
-        </div>
-
-        <div class="grid grid-cols-4 gap-3" id="thumbnails-container">
-          <!-- Thumbnails di-render oleh JS -->
         </div>
 
         <div class="bg-white rounded-2xl border border-brand-border p-5 space-y-3">
@@ -184,7 +179,7 @@
 
           <div class="flex items-baseline gap-3">
             <span id="display-price" class="font-serif text-3xl font-bold text-brand-cuko">Rp 0</span>
-            <span class="text-xs text-gray-500 font-medium">/ pack terpilih</span>
+            <span class="text-xs text-gray-500 font-medium">/ pack</span>
           </div>
 
           <p id="product-description" class="text-xs sm:text-sm text-gray-600 leading-relaxed">
@@ -200,14 +195,6 @@
               </div>
               <ul id="package-contents-list" class="space-y-1.5 text-xs text-gray-700"></ul>
             </div>
-          </div>
-
-          <!-- Pilihan Varian Pack -->
-          <div class="space-y-2 pt-2">
-            <label class="block text-xs font-bold uppercase tracking-wider text-brand-cuko">
-              Pilih Varian Kemasan & Porsi:
-            </label>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5" id="variant-selector-container"></div>
           </div>
 
           <!-- Counter Kuantitas -->
@@ -249,7 +236,7 @@
             </div>
 
             <p class="text-[11px] text-center text-gray-500 mt-2">
-              Pesanan siap diproses via WhatsApp resmi (+62 813-6916-2775) dengan kemasan higienis.
+              Pesanan siap diproses via WhatsApp resmi (081369162775).
             </p>
           </div>
         </div>
@@ -281,7 +268,7 @@
       <div class="flex items-center gap-2">
         <span class="font-serif font-bold text-brand-cuko">LINNIA</span>
         <span>•</span>
-        <span>Pempek & Tekwan Ikan Segar Pilihan Asli Palembang</span>
+        <span>Pempek & Tekwan Ikan Segar Pilihan </span>
       </div>
       <div>
         &copy; 2026 LINNIA Pempek & Tekwan. All Rights Reserved.
@@ -289,7 +276,7 @@
     </div>
   </footer>
 
-  <!-- ================= CART DRAWER (Sama seperti index.html) ================= -->
+  <!-- ================= CART DRAWER ================= -->
   <div id="cart-drawer-backdrop" onclick="toggleCartDrawer(false)" class="fixed inset-0 bg-black/60 z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
   
   <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-[480px] bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
@@ -348,26 +335,20 @@
     // DATA MENU (Harus sinkron dengan index.html)
     // ---------------------------------------------------------
     const MENU_DATA = [
-      { id: '1', title: 'Pempek Kapal Selam', category: 'pempek', price: 20000, desc: 'Pempek ukuran besar dengan isian telur utuh.', stok: 'Tersedia', img: 'pempek.jpg', tag: 'Favorit Pempek' },
-      { id: '2', title: 'Pempek Lenjer', category: 'pempek', price: 15000, desc: 'Pempek panjang khas Palembang yang kenyal dan gurih.', stok: 'Tersedia', img: 'pempek.jpg', tag: 'Menu Pilihan' },
-      { id: '3', title: 'Tekwan Porsi Personal', category: 'tekwan', price: 25000, desc: 'Sajian tekwan hangat dengan kaldu udang, jamur kuping, dan soun.', stok: 'Tersedia', img: 'tekwan.jpg', tag: 'Best Seller Tekwan' },
-      { id: '4', title: 'Paket Komplit LINNIA', category: 'paket', price: 85000, desc: 'Kombinasi kapal selam, lenjer, dan adaan lengkap dengan cuko.', stok: 'Tersedia', img: 'pempek.jpg', tag: 'Paket Hemat' },
-      { id: '5', title: 'Pempek Kulit Crispy', category: 'pempek', price: 12000, desc: 'Olahan kulit tenggiri yang digoreng garing, super gurih.', stok: 'Stok Menipis', img: 'pempek.jpg', tag: 'Menu Pilihan' },
-      { id: '6', title: 'Pempek Adaan', category: 'pempek', price: 10000, desc: 'Pempek bulat kenyal yang gurih dan harum.', stok: 'Tersedia', img: 'pempek.jpg', tag: 'Menu Pilihan' }
+      { id: '3', title: 'Paket Komplit Tekwan LINNIA', category: 'tekwan', price: 25000, desc: 'Tekwan dari olahan ikan segar pilihan dengan tekstur kenyal yang pas. Disiram kuah kaldu rempah khas LINNIA, lengkap dengan isian jamur kuping, bunga sedap malam, soun, dan taburan bawang goreng.', stok: 'Tersedia', img: 'tekwan.jpg', tag: 'Best Seller Tekwan' },
+      { id: '4', title: 'Paket Komplit Pempek LINNIA', category: 'paket', price: 35000, desc: 'Kombinasi 15 buah pempek dalam satu kemasan praktis. Menghadirkan perpaduan varian Lenjer, Telur, Keju, Adaan, serta Kulit. Sudah dilengkapi dengan kuah cuko andalan LINNIA.empek dengan berbagai varian yang lezat.', stok: 'Tersedia', img: 'paket pempek.jpg', tag: 'Paket Hemat' }
     ];
 
-    const ADMIN_WA_NUMBER = "62895359511378";
+    const ADMIN_WA_NUMBER = "6281369162775";
     
-    // Ambil ID dari URL (contoh: product-detail.html?id=2)
+    // Ambil ID dari URL (contoh: product-detail.html?id=3)
     const urlParams = new URLSearchParams(window.location.search);
     let productId = urlParams.get('id');
-    // Jika tidak ada ID, default ke produk pertama
-    if(!productId) productId = '1';
+    // Jika tidak ada ID, default ke produk pertama (ID 3)
+    if(!productId) productId = '3';
 
     let currentProductBase = MENU_DATA.find(p => String(p.id) === String(productId));
     let currentProduct = null;
-
-    let selectedVariantIndex = 0;
     let quantity = 1;
     let cart = [];
 
@@ -396,12 +377,7 @@
         desc: currentProductBase.desc,
         basePrice: currentProductBase.price,
         stockText: currentProductBase.stok,
-        images: [
-          currentProductBase.img,
-          isTekwan ? "tekwan.jpg" : "pempek.jpg",
-          isTekwan ? "pempek.jpg" : "tekwan.jpg",
-          "banner.jpeg"
-        ],
+        image: currentProductBase.img, // Hanya 1 gambar utama
         contents: isTekwan ? [
           "1 Pack Butiran Tekwan Tenggiri Vakum",
           "1 Bungkus Bumbu Kaldu Udang Segar",
@@ -410,8 +386,8 @@
         ] : [
           "1 Pack Olahan Ikan Segar (Vakum)",
           "1 Pouch Kuah Cuko Kental Aren",
-          "1 Bungkus Bubuk Ebi Sangrai",
-          "Sambal Cabai Rawit Hijau"
+          ,
+          
         ],
         cookingGuide: isTekwan ? [
           "1. Didihkan 400ml air dalam panci.",
@@ -423,11 +399,6 @@
           "2. Panaskan minyak di wajan dengan api sedang.",
           "3. Goreng pempek hingga kuning keemasan dan renyah.",
           "4. Potong sesuai selera, siram dengan kuah cuko."
-        ],
-        variants: [
-          { name: "Standar (1 Porsi)", multiplier: 1, labelPrice: formatRupiah(currentProductBase.price), desc: "Porsi pas 1 orang" },
-          { name: "Double Pack (2 Porsi)", multiplier: 1.95, labelPrice: formatRupiah(currentProductBase.price * 1.95), desc: "Porsi berdua lebih hemat" },
-          { name: "Party (4 Porsi)", multiplier: 3.8, labelPrice: formatRupiah(currentProductBase.price * 3.8), desc: "Puas kumpul keluarga" }
         ]
       };
 
@@ -448,18 +419,11 @@
         badgeEl.classList.remove('hidden');
       }
 
-      document.getElementById("main-product-img").src = currentProduct.images[0];
-      
-      // Render Thumbnails
-      const thumbsContainer = document.getElementById("thumbnails-container");
-      thumbsContainer.innerHTML = '';
-      currentProduct.images.forEach((img, index) => {
-        const btn = document.createElement('button');
-        btn.onclick = () => changeMainImage(index);
-        btn.className = `thumb-btn border rounded-xl overflow-hidden aspect-square bg-white p-1 transition ${index === 0 ? 'border-brand-cuko border-2' : 'border-brand-border hover:border-brand-cuko'}`;
-        btn.innerHTML = `<img src="${img}" onerror="this.src='pempek.jpg'" class="w-full h-full object-cover rounded-lg">`;
-        thumbsContainer.appendChild(btn);
-      });
+      // Atur gambar utama dari data produk
+      document.getElementById("main-product-img").src = currentProduct.image;
+      document.getElementById("main-product-img").onerror = function() {
+        this.src = currentProduct.image; 
+      };
 
       const contentsContainer = document.getElementById("package-contents-list");
       contentsContainer.innerHTML = "";
@@ -473,43 +437,14 @@
         guideContainer.innerHTML += `<p>${step}</p>`;
       });
 
-      renderVariants();
       recalculatePrices();
       
       // Fade in
       document.getElementById('product-container').classList.remove('opacity-0');
     }
 
-    function renderVariants() {
-      const container = document.getElementById("variant-selector-container");
-      container.innerHTML = "";
-
-      currentProduct.variants.forEach((v, index) => {
-        const isSelected = index === selectedVariantIndex;
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.onclick = () => selectVariant(index);
-        btn.className = `p-3 rounded-xl border text-left transition flex flex-col justify-between ${
-          isSelected ? "border-brand-cuko bg-brand-creamSoft ring-1 ring-brand-cuko" : "border-brand-border bg-white hover:border-brand-cuko/50"
-        }`;
-        btn.innerHTML = `
-          <div class="text-[11px] font-bold text-brand-cuko mb-0.5">${v.name}</div>
-          <div class="text-[10px] text-gray-500 mb-2">${v.desc}</div>
-          <div class="text-xs font-bold text-brand-gold">${v.labelPrice}</div>
-        `;
-        container.appendChild(btn);
-      });
-    }
-
-    function selectVariant(index) {
-      selectedVariantIndex = index;
-      renderVariants();
-      recalculatePrices();
-    }
-
     function recalculatePrices() {
-      const variant = currentProduct.variants[selectedVariantIndex];
-      const unitPrice = Math.round(currentProduct.basePrice * variant.multiplier);
+      const unitPrice = currentProduct.basePrice;
       const subtotal = unitPrice * quantity;
 
       document.getElementById("display-price").textContent = formatRupiah(unitPrice);
@@ -534,20 +469,6 @@
       recalculatePrices();
     }
 
-    function changeMainImage(index) {
-      document.getElementById("main-product-img").src = currentProduct.images[index];
-      const buttons = document.querySelectorAll(".thumb-btn");
-      buttons.forEach((b, i) => {
-        if (i === index) {
-          b.classList.add("border-brand-cuko", "border-2");
-          b.classList.remove("border-brand-border");
-        } else {
-          b.classList.remove("border-brand-cuko", "border-2");
-          b.classList.add("border-brand-border");
-        }
-      });
-    }
-
     // --- CART LOGIC ---
     function loadCart() {
       try {
@@ -564,20 +485,19 @@
     }
 
     function handleAddToCart() {
-      const variant = currentProduct.variants[selectedVariantIndex];
-      const unitPrice = Math.round(currentProduct.basePrice * variant.multiplier);
-      const fullTitle = `${currentProduct.title} (${variant.name})`;
+      const unitPrice = currentProduct.basePrice;
+      const fullTitle = currentProduct.title;
 
-      const existingIndex = cart.findIndex(item => item.id === `${currentProduct.id}-${selectedVariantIndex}`);
+      const existingIndex = cart.findIndex(item => item.id === String(currentProduct.id));
       if (existingIndex > -1) {
         cart[existingIndex].qty += quantity;
       } else {
         cart.push({
-          id: `${currentProduct.id}-${selectedVariantIndex}`,
+          id: String(currentProduct.id),
           title: fullTitle,
           price: unitPrice,
           qty: quantity,
-          img: currentProduct.images[0]
+          img: currentProduct.image
         });
       }
 
@@ -589,9 +509,11 @@
       toast.classList.remove("hidden");
       window.scrollTo({ top: 0, behavior: "smooth" });
       setTimeout(() => toast.classList.add("hidden"), 4000);
+      
+      toggleCartDrawer(true);
     }
 
-    // Drawer Logic (Sama dengan index)
+    // Drawer Logic
     function toggleCartDrawer(open) {
       const drawer = document.getElementById("cart-drawer");
       const backdrop = document.getElementById("cart-drawer-backdrop");
